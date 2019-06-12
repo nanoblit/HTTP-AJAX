@@ -16,12 +16,14 @@ const FriendsList = ({ friends }) => (
 );
 
 FriendsList.propTypes = {
-  friends: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-  }),
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      age: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 FriendsList.defaultProps = {
