@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import FriendForm from './components/FriendForm';
@@ -13,7 +14,7 @@ function App() {
   const [emailValue, setEmailValue] = useState('');
 
   const getFriends = async () => {
-    setSpinner('Loading friends');
+    setSpinner('Loading friends...');
     try {
       const response = await axios.get('http://localhost:5000/friends');
       setFriends(response.data);
@@ -50,18 +51,36 @@ function App() {
 
   return (
     <div className="App">
-      <FriendForm
-        onSubmitFriendForm={onSubmitFriendForm}
-        onChangeName={onChangeName}
-        onChangeAge={onChangeAge}
-        onChangeEmail={onChangeEmail}
-        nameValue={nameValue}
-        ageValue={ageValue}
-        emailValue={emailValue}
+      <nav>
+        <Link to="/friend_form">Add friend</Link>
+        <Link to="/friends">Friends</Link>
+      </nav>
+      <Route path="/" exact render={() => <div>All your friends in one place!</div>} />
+      <Route
+        path="/friend_form"
+        render={props => (
+          <FriendForm
+            {...props}
+            onSubmitFriendForm={onSubmitFriendForm}
+            onChangeName={onChangeName}
+            onChangeAge={onChangeAge}
+            onChangeEmail={onChangeEmail}
+            nameValue={nameValue}
+            ageValue={ageValue}
+            emailValue={emailValue}
+          />
+        )}
       />
-      {error && <div>{error}</div>}
-      {spinner && <div>{spinner}</div>}
-      <FriendsList friends={friends} />
+      <Route
+        path="/friends"
+        render={props => (
+          <div>
+            {error && <div>{error}</div>}
+            {spinner && <div>{spinner}</div>}
+            <FriendsList {...props} friends={friends} />
+          </div>
+        )}
+      />
     </div>
   );
 }
