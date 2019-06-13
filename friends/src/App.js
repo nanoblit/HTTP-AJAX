@@ -9,6 +9,7 @@ function App() {
   const [friends, setFriends] = useState([]);
   const [error, setError] = useState('');
   const [spinner, setSpinner] = useState('');
+  const [idValue, setIdValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [ageValue, setAgeValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -28,7 +29,6 @@ function App() {
 
   const postFriend = async () => {
     const newFriend = {
-      id: Date.now(),
       name: nameValue,
       age: ageValue,
       email: emailValue,
@@ -38,7 +38,31 @@ function App() {
       await axios.post(friendsUrl, newFriend);
       getFriends();
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
+    }
+  };
+
+  const updateFriend = async () => {
+    const updatedFriend = {
+      name: nameValue,
+      age: ageValue,
+      email: emailValue,
+    };
+
+    try {
+      await axios.put(`${friendsUrl}/${idValue}`, updatedFriend);
+      getFriends();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const deleteFriend = async id => {
+    try {
+      await axios.delete(`${friendsUrl}/${id}`);
+      getFriends();
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
@@ -52,6 +76,22 @@ function App() {
     setNameValue('');
     setAgeValue('');
     setEmailValue('');
+  };
+
+  const onUpdateFriend = () => {
+    updateFriend();
+    setIdValue('');
+    setNameValue('');
+    setAgeValue('');
+    setEmailValue('');
+  };
+
+  const onDeleteFriend = id => {
+    deleteFriend(id);
+  };
+
+  const onChangeId = e => {
+    setIdValue(e.target.value);
   };
 
   const onChangeName = e => {
@@ -79,9 +119,12 @@ function App() {
           <FriendForm
             {...props}
             onSubmitFriendForm={onSubmitFriendForm}
+            onUpdateFriend={onUpdateFriend}
+            onChangeId={onChangeId}
             onChangeName={onChangeName}
             onChangeAge={onChangeAge}
             onChangeEmail={onChangeEmail}
+            idValue={idValue}
             nameValue={nameValue}
             ageValue={ageValue}
             emailValue={emailValue}
@@ -94,7 +137,7 @@ function App() {
           <div>
             {error && <div>{error}</div>}
             {spinner && <div>{spinner}</div>}
-            <FriendsList {...props} friends={friends} />
+            <FriendsList {...props} friends={friends} onDeleteFriend={onDeleteFriend} />
           </div>
         )}
       />
