@@ -12,16 +12,33 @@ function App() {
   const [nameValue, setNameValue] = useState('');
   const [ageValue, setAgeValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
+  const friendsUrl = 'http://localhost:5000/friends';
 
   const getFriends = async () => {
     setSpinner('Loading friends...');
     try {
-      const response = await axios.get('http://localhost:5000/friends');
+      const response = await axios.get(friendsUrl);
       setFriends(response.data);
     } catch (err) {
       setError(err.message);
     } finally {
       setSpinner('');
+    }
+  };
+
+  const postFriend = async () => {
+    const newFriend = {
+      id: Date.now(),
+      name: nameValue,
+      age: ageValue,
+      email: emailValue,
+    };
+
+    try {
+      await axios.post(friendsUrl, newFriend);
+      getFriends();
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -31,7 +48,7 @@ function App() {
 
   const onSubmitFriendForm = e => {
     e.preventDefault();
-    console.log({ nameValue, ageValue, emailValue });
+    postFriend();
     setNameValue('');
     setAgeValue('');
     setEmailValue('');
@@ -55,7 +72,7 @@ function App() {
         <Link to="/friend_form">Add friend</Link>
         <Link to="/friends">Friends</Link>
       </nav>
-      <Route path="/" exact render={() => <div>All your friends in one place!</div>} />
+      <Route path="/" exact render={() => <h1>All your friends in one place!</h1>} />
       <Route
         path="/friend_form"
         render={props => (
