@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
+    text-align: left;
     font-weight: bold;
     font-size: 3rem;
   }
@@ -25,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
 
     &:hover {
       background-color: blueviolet;
-    color: azure;
+      color: azure;
     }
   }
 

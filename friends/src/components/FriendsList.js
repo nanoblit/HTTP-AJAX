@@ -10,8 +10,7 @@ const FriendsList = ({ friends, onDeleteFriend }) => (
     }) => (
       <FriendDiv key={id}>
         <div>
-          <h1>{name}</h1>
-          <p>id: {id}</p>
+          <h1>{name}<span> {id}</span></h1>
           <p>age: {age}</p>
           <p>email: {email}</p>
         </div>

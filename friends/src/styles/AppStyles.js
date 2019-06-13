@@ -18,7 +18,7 @@ const AppDiv = styled.div`
     }
   }
 
-  h1 {
+  >h1 {
     text-align: center;
   }
 `;

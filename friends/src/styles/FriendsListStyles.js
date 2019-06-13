@@ -14,6 +14,14 @@ export const FriendDiv = styled.div`
   border-bottom: 0.1rem solid blueviolet;
   padding: 2rem;
 
+  h1 {
+    span{
+      color: blueviolet;
+      font-size: 1.5rem;
+      font-weight: 100;
+    }
+  }
+
   &:last-of-type {
     border-bottom: none;
   }
