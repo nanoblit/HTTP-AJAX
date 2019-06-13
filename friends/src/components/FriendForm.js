@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FriendFormDiv from '../styles/FriendFormStyles';
+import StyledFriendForm from '../styles/FriendFormStyles';
 
 const FriendForm = ({
   onSubmitFriendForm,
@@ -15,7 +15,7 @@ const FriendForm = ({
   ageValue,
   emailValue,
 }) => (
-  <FriendFormDiv onSubmit={onSubmitFriendForm}>
+  <StyledFriendForm onSubmit={onSubmitFriendForm}>
     <input onChange={onChangeId} value={idValue} placeholder="ID (if changing friend)" required />
     <input onChange={onChangeName} value={nameValue} placeholder="Name" required />
     <input onChange={onChangeAge} value={ageValue} placeholder="Age" required />
@@ -24,7 +24,7 @@ const FriendForm = ({
     <button onClick={onUpdateFriend} type="button">
       Change Friend
     </button>
-  </FriendFormDiv>
+  </StyledFriendForm>
 );
 
 FriendForm.propTypes = {

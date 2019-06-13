@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FriendFormDiv = styled.form`
+const StyledFriendForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,4 +13,4 @@ const FriendFormDiv = styled.form`
   }
 `;
 
-export default FriendFormDiv;
+export default StyledFriendForm;
