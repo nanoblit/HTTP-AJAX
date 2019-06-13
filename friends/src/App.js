@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
+import GlobalStyles from './styles/GlobalStyles';
+import AppDiv from './styles/AppStyles';
+
 import FriendForm from './components/FriendForm';
 import FriendsList from './components/FriendsList';
 
@@ -107,7 +110,8 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <AppDiv className="App">
+      <GlobalStyles />
       <nav>
         <Link to="/friend_form">Add friend</Link>
         <Link to="/friends">Friends</Link>
@@ -141,7 +145,7 @@ function App() {
           </div>
         )}
       />
-    </div>
+    </AppDiv>
   );
 }
 

@@ -1,22 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FriendsListDiv, { FriendDiv } from '../styles/FriendsListStyles';
+
 const FriendsList = ({ friends, onDeleteFriend }) => (
-  <div>
+  <FriendsListDiv>
     {friends.map(({
       id, name, age, email,
     }) => (
-      <div key={id}>
-        <h1>{name}</h1>
-        <p>id: {id}</p>
-        <p>age: {age}</p>
-        <p>email: {email}</p>
-        <button onClick={() => onDeleteFriend(id)} type="button">
-          ✕
-        </button>
-      </div>
+      <FriendDiv key={id}>
+        <div>
+          <h1>{name}</h1>
+          <p>id: {id}</p>
+          <p>age: {age}</p>
+          <p>email: {email}</p>
+        </div>
+        <div>
+          <button onClick={() => onDeleteFriend(id)} type="button">
+            ✕
+          </button>
+        </div>
+      </FriendDiv>
     ))}
-  </div>
+  </FriendsListDiv>
 );
 
 FriendsList.propTypes = {
