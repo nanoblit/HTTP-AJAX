@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FriendsList = ({ friends }) => (
-  <div>
+import FriendsListDiv, { FriendDiv } from '../styles/FriendsListStyles';
+
+const FriendsList = ({ friends, onDeleteFriend }) => (
+  <FriendsListDiv>
     {friends.map(({
       id, name, age, email,
     }) => (
-      <div key={id}>
-        <h1>{name}</h1>
-        <p>age: {age}</p>
-        <p>email: {email}</p>
-      </div>
+      <FriendDiv key={id}>
+        <div>
+          <h1>{name}<span> {id}</span></h1>
+          <p>age: {age}</p>
+          <p>email: {email}</p>
+        </div>
+        <div>
+          <button onClick={() => onDeleteFriend(id)} type="button">
+            ✕
+          </button>
+        </div>
+      </FriendDiv>
     ))}
-  </div>
+  </FriendsListDiv>
 );
 
 FriendsList.propTypes = {
@@ -24,6 +33,7 @@ FriendsList.propTypes = {
       email: PropTypes.string.isRequired,
     }),
   ),
+  onDeleteFriend: PropTypes.func.isRequired,
 };
 
 FriendsList.defaultProps = {
